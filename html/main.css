@@ -1,0 +1,15 @@
+.portal-header {
+	width:100%;
+	height: 40px;
+	border: solid;
+}
+.portal-sidebar {
+	width:10%;
+	height: 93vh;
+	border: solid;
+	float: left;
+	
+}
+.portal-content {
+	float: left;
+}
