@@ -1,10 +1,22 @@
 from django.db import models
 
-# Create your models here.
+
+
+class College(models.Model):
+    Name = models.CharField(max_length=50)
+    idUN = models.IntegerField()
+    #get essays through cololegevar.essay_set.all()
+
+class Essay(models.Model):
+    collegeSource = models.ForeignKey(College, on_delete=models.CASCADE)
+    prompt = models.CharField(max_length = 1000)#may need to increase
+
+
+
 
 class Parent(models.Model):
     type = models.IntegerField()#1 for teacher, 2 for student and 3, for parent
-    id = models.IntegerField()#
+    idUN = models.IntegerField()#
     userName = models.CharField(max_length=50)
     Name = models.CharField(max_length=50)
 
@@ -16,7 +28,7 @@ class Parent(models.Model):
 
 class Teacher(models.Model):
     type = models.IntegerField()#1 for teacher, 2 for student and 3, for parent
-    id = models.IntegerField()#
+    idUN = models.IntegerField()#
     userName = models.CharField(max_length=50)
     Name = models.CharField(max_length=50)
 
@@ -27,13 +39,13 @@ class Teacher(models.Model):
 
 class Student(models.Model):
     type = models.IntegerField()#1 for teacher, 2 for student and 3, for parent
-    id = models.IntegerField()#
+    idUN = models.IntegerField()#
     userName = models.CharField(max_length=50)
     Name = models.CharField(max_length=50)
 
     #many students to one
     child = models.ForeignKey(Parent, on_delete=models.CASCADE)  # acces through var(parentvar).student_set.all()
-    teacher = models.ForeignKey(Teacher, on_delete=models.SET_NULL) #get students through teachervar.student_set.all()
+    teacher = models.ForeignKey(Teacher, null=True,on_delete=models.SET_NULL) #get students through teachervar.student_set.all()
 
     #many colleges to many sutdents
     colleges = models.ManyToManyField(College)
@@ -43,18 +55,10 @@ class Student(models.Model):
         return self.userName + ' - ' + self.id
 
 
+
+
 class StudentEssay(models.Model):
-    id = models.IntegerField()
-    prompt = models.ForeignKey(Essay,on_delete=models.SET_NULL )
-    studentSource = models.ForeignKey(Student,on_delete=models.SET_NULL )
+    idUN = models.IntegerField()
+    prompt = models.ForeignKey(Essay,null=True,on_delete=models.SET_NULL )
+    studentSource = models.ForeignKey(Student,on_delete=models.CASCADE )
     pdfSrc = models.CharField(max_length=50)
-
-
-class College(models.Model):
-    Name = models.CharField(max_length=50)
-    id = models.IntegerField()
-    #get essays through cololegevar.essay_set.all()
-
-class Essay(models.Model):
-    collegeSource = models.ForeignKey(College, on_delete=models.CASCADE)
-    prompt = models.CharField(max_length = 1000)#may need to increase
