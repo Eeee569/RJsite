@@ -1,0 +1,26 @@
+body, html {
+	width: 100%; 
+	height: 100%;
+	 margin: 0; 
+	 padding: 0;
+}
+.portal-header {
+	width:99%;
+	height: 40px;
+	border: solid;
+}
+.portal-sidebar {
+	width:10%;
+	height: 92vh;
+	border: solid;
+	float: left;
+	
+}
+.portal-content {
+	float: left;
+	
+}
+
+.portal-content-frame {
+	display: block; width: 100%; height: 100%; border: none;
+}
