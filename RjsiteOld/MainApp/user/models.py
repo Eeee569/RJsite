@@ -20,7 +20,7 @@ class Parent(models.Model):
     userName = models.CharField(max_length=50)
     Name = models.CharField(max_length=50)
 
-
+#s
 
     def __str__(self):
         return self.userName + ' - ' + self.id
@@ -31,7 +31,7 @@ class Teacher(models.Model):
     idUN = models.IntegerField()#
     userName = models.CharField(max_length=50)
     Name = models.CharField(max_length=50)
-
+#list thw rt dsfhjh the g ssaf
 
 
     def __str__(self):
