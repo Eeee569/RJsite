@@ -1,6 +1,6 @@
 from django.db import models
-
-# toDo: ajusts max lenght for chars,
+from CollageApp.models import StudentEssay, College
+# toDo: ajusts max lenght for chars,update refs to other models
 
 class Usr(models.Model):
     #uniId = models.IntegerField() django already does this with a.id
@@ -17,6 +17,8 @@ class Usr(models.Model):
 class Student(Usr):
     #find teachers with s.teacher_set.all()(or .filter())
     #find Parents with s.parent__set.all()...
+    essays = models.ManyToManyField(StudentEssay)
+    colleges = models.ManyToManyField(College)
     class Meta:
         ordering = ('name','id',)
 
@@ -39,3 +41,4 @@ class Teacher(Usr):
 
     def __str__(self):
         return self.name + self.id
+
