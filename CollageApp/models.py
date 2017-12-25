@@ -33,9 +33,11 @@ class StudentEssay(models.Model): #all student essays must generate a file name 
     tital = models.CharField(max_length=100)
     fileName = models.CharField(max_length=100)
     filePath = models.CharField(max_length=100)
-    time = models.CharField(max_length=100)
+    time = models.DateTimeField()
     prompts = models.ManyToManyField(CollegePrompt)
-
+    coments = models.CharField(max_length=1000)
     def __str__(self):
         return self.filename + self.id
 
+    class Meta:
+        ordering = ('-time','tital','id',)#-makes it descending
