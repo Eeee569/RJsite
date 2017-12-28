@@ -1,12 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
 from CollageApp.models import StudentEssay, College
 # toDo: ajusts max lenght for chars,update refs to other models
 
 class Usr(models.Model):
     #uniId = models.IntegerField() django already does this with a.id
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.CharField(max_length=200)
-    userName = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
+    #userName = models.CharField(max_length=200)
+    #password = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
 
     class Meta:
