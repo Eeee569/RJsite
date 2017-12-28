@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'CollageApp.apps.CollageappConfig',
     'usr.apps.UsrConfig',
+    'MailService.apps.MailserviceConfig',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',

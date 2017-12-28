@@ -11,8 +11,8 @@ class Usr(models.Model):
     #password = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
 
-    class Meta:
-        abstract = True
+    #class Meta: # i dont know if this has to be abstract
+        #abstract = True
 
 class Parent(Usr):
     #students = models.ManyToManyField(Student)
@@ -35,8 +35,8 @@ class Teacher(Usr):
 class Student(Usr):
     #find students with s.student_set.all()(or .filter())
     colleges = models.ManyToManyField('CollageApp.College')
-    teacher = models.ForeignKey(Teacher,on_delete=models.SET_NULL,null=True)#set null may throw error
-    parent = models.ForeignKey(Parent,on_delete=models.SET_NULL,null=True)
+    studentTeacher = models.ForeignKey(Teacher,on_delete=models.SET_NULL,null=True)#set null may throw error
+    studentParent = models.ForeignKey(Parent,on_delete=models.SET_NULL,null=True)
     class Meta:
         ordering = ('name','id',)
 
