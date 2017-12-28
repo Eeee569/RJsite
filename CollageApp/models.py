@@ -1,5 +1,5 @@
 from django.db import models
-
+from usr.models import Student
 # toDo: ajusts max lenght for chars, update refs to other models, make sure studentEssay always has a filename and filePath
 
 # Create your models here.
@@ -30,7 +30,8 @@ class CollegePrompt(models.Model):
 
 
 class StudentEssay(models.Model): #all student essays must generate a file name and path to be valid
-    tital = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    student = models.ForeignKey('usr.Student',on_delete=models.CASCADE)
     fileName = models.CharField(max_length=100)
     filePath = models.CharField(max_length=100)
     time = models.DateTimeField()
@@ -40,4 +41,4 @@ class StudentEssay(models.Model): #all student essays must generate a file name 
         return self.filename + self.id
 
     class Meta:
-        ordering = ('-time','tital','id',)#-makes it descending
+        ordering = ('-time','title','id',)#-makes it descending

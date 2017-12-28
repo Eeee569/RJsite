@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
-from CollageApp.models import StudentEssay, College
+#from CollageApp.models import College
 # toDo: ajusts max lenght for chars,update refs to other models
 
 class Usr(models.Model):
     #uniId = models.IntegerField() django already does this with a.id
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    #**********set true when implementing authentication*************user = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.CharField(max_length=200)
     #userName = models.CharField(max_length=200)
     #password = models.CharField(max_length=200)
@@ -14,21 +14,8 @@ class Usr(models.Model):
     class Meta:
         abstract = True
 
-
-
-class Student(Usr):
-    #find teachers with s.teacher_set.all()(or .filter())
-    #find Parents with s.parent__set.all()...
-    essays = models.ManyToManyField(StudentEssay)
-    colleges = models.ManyToManyField(College)
-    class Meta:
-        ordering = ('name','id',)
-
-    def __str__(self):
-        return self.name + self.id
-
 class Parent(Usr):
-    students = models.ManyToManyField(Student)
+    #students = models.ManyToManyField(Student)
     class Meta:
         ordering = ('name','id',)
 
@@ -37,7 +24,19 @@ class Parent(Usr):
 
 
 class Teacher(Usr):
-    students = models.ManyToManyField(Student)
+    #students = models.ManyToManyField(Student)
+    class Meta:
+        ordering = ('name','id',)
+
+    def __str__(self):
+        return self.name + self.id
+
+
+class Student(Usr):
+    #find students with s.student_set.all()(or .filter())
+    colleges = models.ManyToManyField('CollageApp.College')
+    teacher = models.ForeignKey(Teacher,on_delete=models.SET_NULL,null=True)#set null may throw error
+    parent = models.ForeignKey(Parent,on_delete=models.SET_NULL,null=True)
     class Meta:
         ordering = ('name','id',)
 
