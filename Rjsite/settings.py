@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'CollageApp.apps.CollageappConfig',
     'usr.apps.UsrConfig',
     'MailService.apps.MailserviceConfig',
+    'Students.apps.StudentsConfig',
+    'Billing.apps.BillingConfig',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
