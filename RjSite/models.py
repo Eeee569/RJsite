@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 #from CollageApp.models import College
-# toDo: ajusts max lenght for chars,update refs to other models
+# toDo: ajusts max lenght for chars or update to TextField,update refs to other models
 
 class Usr(models.Model):
     #uniId = models.IntegerField() django already does this with a.id
@@ -11,7 +11,7 @@ class Usr(models.Model):
     #password = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
 
-    #class Meta: # i dont know if this has to be abstract
+    #class Meta: # i dont know if this has to be abstract, to referance by mail must not be abstract
         #abstract = True
 
 class Parent(Usr):
@@ -80,7 +80,7 @@ class StudentEssay(models.Model): #all student essays must generate a file name 
     student = models.ForeignKey(Student,on_delete=models.CASCADE)
     fileName = models.CharField(max_length=100)
     filePath = models.CharField(max_length=100)
-    time = models.DateTimeField()
+    time = models.DateTimeField(auto_now_add=True)
     prompts = models.ManyToManyField(CollegePrompt)
     coments = models.CharField(max_length=1000)
     def __str__(self):
